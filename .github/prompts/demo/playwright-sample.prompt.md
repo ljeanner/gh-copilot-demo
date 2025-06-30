@@ -1,8 +1,7 @@
 Please use Playwright tools to generate a test for this scenario:
 
-1. Open the [Microsoft Playwright GitHub repository](https://github.com/microsoft/playwright).
-2. Click on the **Pull requests** tab.
-3. Find and open the 3rd pull request in the list.
-4. take a screenshot of the pull request page.
-
-When ready run the test in headed mode so i can see everything
+1. Open the [Album App](http://localhost:3001).
+2. Click on the **Add to cart** on the first tile.
+3. Click on the cart button on the top right to display the cart.
+4. Check that the cart contains the added album.
+5. Take a screenshot of the cart.
