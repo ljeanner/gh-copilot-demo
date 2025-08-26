@@ -34,19 +34,20 @@
       "name": "Node.js: Album Viewer Debug",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceFolder}/album-viewer/bin/www",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "--host", "0.0.0.0", "--port", "5173"],
       "cwd": "${workspaceFolder}/album-viewer",
-      "preLaunchTask": "npm: install - album-viewer",
-      "runtimeExecutable": "node",
       "env": {
         "NODE_ENV": "development",
-        "PORT": "3001",
-        "ALBUM_API_HOST": "localhost:3000", // or <my-fancy-codespace-name>-3000 if on codespaces
-        "BACKGROUND_COLOR": "black"
+        "VITE_ALBUM_API_HOST": "localhost:3000",
+        "VITE_BACKGROUND_COLOR": "black"
       },
       "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "sourceMaps": true
+      "serverReadyAction": {
+        "pattern": "Local:   (http://localhost:[0-9]+)",
+        "uriFormat": "%s",
+        "action": "openExternally"
+      }
     }
   ]
 }
