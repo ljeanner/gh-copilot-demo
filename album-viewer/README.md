@@ -1,6 +1,6 @@
 # Album Viewer
 
-A simple Vue.js application that displays albums from the albums API.
+A modern Vue.js 3 application built with TypeScript that displays albums from the albums API.
 
 ## Features
 
@@ -9,13 +9,16 @@ A simple Vue.js application that displays albums from the albums API.
 - 🖼️ Album cover images with hover effects
 - 💰 Price display for each album
 - 📱 Mobile-friendly responsive design
-- ⚡ Built with Vue 3 and Vite
+- ⚡ Built with Vue 3, TypeScript, and Vite
+- 🔧 Full TypeScript support with type safety
+- 📝 Modern Composition API with `<script setup>`
 
 ## Prerequisites
 
 - Node.js (v16 or higher)
 - npm or yarn
-- The albums-api should be running on `http://localhost:5000`
+- TypeScript knowledge (helpful but not required)
+- The albums-api should be running on `http://localhost:3000`
 
 ## Getting Started
 
@@ -29,7 +32,7 @@ A simple Vue.js application that displays albums from the albums API.
    npm run dev
    ```
 
-3. Open your browser and navigate to `http://localhost:3000`
+3. Open your browser and navigate to `http://localhost:3001`
 
 ## API Integration
 
@@ -51,8 +54,9 @@ The API should return albums in the following format:
 ## Scripts
 
 - `npm run dev` - Start development server
-- `npm run build` - Build for production
+- `npm run build` - Build for production (with TypeScript compilation)
 - `npm run preview` - Preview production build
+- `npm run type-check` - Run TypeScript type checking without building
 
 ## Project Structure
 
@@ -60,20 +64,36 @@ The API should return albums in the following format:
 album-viewer/
 ├── src/
 │   ├── components/
-│   │   └── AlbumCard.vue    # Individual album card component
-│   ├── App.vue              # Main app component
-│   └── main.js              # App entry point
+│   │   └── AlbumCard.vue    # Individual album card component (TypeScript)
+│   ├── types/
+│   │   └── album.ts         # TypeScript type definitions
+│   ├── App.vue              # Main app component (TypeScript)
+│   └── main.ts              # App entry point (TypeScript)
 ├── index.html               # HTML template
-├── vite.config.js           # Vite configuration
+├── vite.config.ts           # Vite configuration (TypeScript)
+├── tsconfig.json            # TypeScript configuration
+├── tsconfig.app.json        # App-specific TypeScript config
+├── env.d.ts                 # Environment type declarations
 └── package.json             # Dependencies and scripts
 ```
 
 ## Technologies Used
 
-- Vue 3 (Composition API)
-- Vite (Build tool)
-- Axios (HTTP client)
+- Vue 3 (Composition API with `<script setup>`)
+- TypeScript (Static type checking and better developer experience)
+- Vite (Build tool with TypeScript support)
+- Axios (HTTP client with TypeScript generics)
 - CSS3 (Grid, Flexbox, Animations)
+
+## TypeScript Features
+
+This application leverages TypeScript for enhanced development experience:
+
+- **Type Safety**: All components, functions, and data structures are strongly typed
+- **Interface Definitions**: Clear contracts for data structures (Album interface)
+- **Better IDE Support**: Enhanced IntelliSense, auto-completion, and error detection
+- **Compile-time Error Checking**: Catch errors before runtime
+- **Modern Vue 3 Syntax**: Uses `<script setup lang="ts">` for optimal TypeScript integration
 
 ## Features in Detail
 

@@ -27,47 +27,33 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import AlbumCard from './components/AlbumCard.vue'
+import type { Album } from './types/album'
 
-export default {
-  name: 'App',
-  components: {
-    AlbumCard
-  },
-  setup() {
-    const albums = ref([])
-    const loading = ref(true)
-    const error = ref(null)
+const albums = ref<Album[]>([])
+const loading = ref<boolean>(true)
+const error = ref<string | null>(null)
 
-    const fetchAlbums = async () => {
-      try {
-        loading.value = true
-        error.value = null
-        const response = await axios.get('/albums')
-        albums.value = response.data
-      } catch (err) {
-        error.value = 'Failed to load albums. Please make sure the API is running.'
-        console.error('Error fetching albums:', err)
-      } finally {
-        loading.value = false
-      }
-    }
-
-    onMounted(() => {
-      fetchAlbums()
-    })
-
-    return {
-      albums,
-      loading,
-      error,
-      fetchAlbums
-    }
+const fetchAlbums = async (): Promise<void> => {
+  try {
+    loading.value = true
+    error.value = null
+    const response = await axios.get<Album[]>('/albums')
+    albums.value = response.data
+  } catch (err) {
+    error.value = 'Failed to load albums. Please make sure the API is running.'
+    console.error('Error fetching albums:', err)
+  } finally {
+    loading.value = false
   }
 }
+
+onMounted(() => {
+  fetchAlbums()
+})
 </script>
 
 <style scoped>

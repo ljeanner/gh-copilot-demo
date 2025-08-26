@@ -27,20 +27,18 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'AlbumCard',
-  props: {
-    album: {
-      type: Object,
-      required: true
-    }
-  },
-  methods: {
-    handleImageError(event) {
-      event.target.src = 'https://via.placeholder.com/300x300/667eea/white?text=Album+Cover'
-    }
-  }
+<script setup lang="ts">
+import type { Album } from '../types/album'
+
+interface Props {
+  album: Album
+}
+
+defineProps<Props>()
+
+const handleImageError = (event: Event): void => {
+  const target = event.target as HTMLImageElement
+  target.src = 'https://via.placeholder.com/300x300/667eea/white?text=Album+Cover'
 }
 </script>
 
