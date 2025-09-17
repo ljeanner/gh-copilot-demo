@@ -1,11 +1,15 @@
 extends layout
 
 block content 
-    div(class="ui message attached " + background_color  style="height:50px") Greatest Hits
+    div(class="ui message attached " + background_color  style="height:50px") 
+      | Greatest Hits
+      a(href="/cart" class="ui right floated button primary") 
+        i(class="shopping cart icon")
+        | Cart
     div(class="ui attached segment")
       div(class="ui divided items")
         each album in albums
-          div(class="item")
+          div(class="item" data-album-id=album.id)
             div(class="ui image small")
               img(src=album.image_url)
             div(class="content")
@@ -13,7 +17,16 @@ block content
                 span(class="album-title")=album.title
               div(class="meta")
                 span(class="meta-info")=album.artist
-                span(class="meta-info")=album.price
+                span(class="meta-info")="$" + album.price
+              div(class="extra")
+                button(class="ui primary button add-to-cart" 
+                       data-album-id=album.id 
+                       data-album-title=album.title 
+                       data-album-artist=album.artist 
+                       data-album-price=album.price 
+                       data-album-image=album.image_url)
+                  i(class="add icon")
+                  | Add to Cart
       
 
   
