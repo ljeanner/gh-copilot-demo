@@ -4,10 +4,17 @@ html
     link(rel="stylesheet" href="https://cdn.rtlcss.com/semantic-ui/2.4.1/semantic.rtl.min.css")
     link(rel='stylesheet' href="/stylesheets/style.css")
     script(type="text/javascript" src="app.js")
+    script(type="text/javascript" src="/javascripts/cart.js")
 
   body
    div(class="ui container")
-    h2(class="ui center aligned icon block header")
-      i(class="music icon")     
-        h1 Demo App Albums
+    div(class="ui menu")
+      div(class="item")
+        h2(class="ui center aligned icon header")
+          i(class="music icon")     
+            span Demo App Albums
+      div(class="right item")
+        a(id="cart-icon" class="ui item" href="/cart")
+          i(class="shopping cart icon")
+          span(id="cart-count" class="ui circular mini red label" style="display: none;") 0
     block content

@@ -13,8 +13,14 @@ block content
                 span(class="album-title")=album.title
               div(class="meta")
                 span(class="meta-info")=album.artist
-                span(class="meta-info")=album.price
+                span(class="meta-info") $#{album.price}
+              div(class="extra")
+                button(class="ui primary button add-to-cart" 
+                       data-id=album.id 
+                       data-title=album.title 
+                       data-artist=album.artist 
+                       data-price=album.price 
+                       data-image-url=album.image_url) Add to Cart
       
 
   
-
