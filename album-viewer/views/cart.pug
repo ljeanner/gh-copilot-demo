@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  div(class="ui container")
+    div(class="ui attached header")
+      h2 Shopping Cart
+    div(class="ui attached segment")
+      div(id="cart-items")
+        // Cart items will be populated by JavaScript
+      div(class="ui divider")
+      div(class="ui grid")
+        div(class="ten wide column")
+          h3(id="cart-total") Total: $0.00
+        div(class="six wide column")
+          div(class="ui buttons")
+            button(id="clear-cart" class="ui button") Clear Cart
+            a(href="/" class="ui primary button") Continue Shopping

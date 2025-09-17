@@ -26,4 +26,11 @@ router.get("/", async function (req, res, next) {
   }
 });
 
+/* GET cart page. */
+router.get("/cart", function (req, res, next) {
+  res.render("cart", { 
+    title: "Shopping Cart"
+  });
+});
+
 module.exports = router;
