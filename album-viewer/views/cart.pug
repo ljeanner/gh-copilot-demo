@@ -1,0 +1,17 @@
+extends layout
+
+block content 
+    div(class="ui message attached " + background_color  style="height:50px") 
+      | Shopping Cart
+      a(href="/" class="ui right floated button") 
+        i(class="left arrow icon")
+        | Back to Albums
+    div(class="ui attached segment")
+      div(id="cart-items" class="ui divided items")
+        div(id="empty-cart" class="ui message" style="display:none;")
+          | Your cart is empty. 
+          a(href="/") Add some albums!
+      div(id="cart-total" class="ui segment" style="display:none;")
+        h3 Total: $
+          span(id="total-amount") 0.00
+        button(class="ui green button fluid") Checkout
