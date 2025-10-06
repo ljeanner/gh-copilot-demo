@@ -1,8 +1,20 @@
 <template>
   <div class="app">
     <header class="header">
-      <h1>🎵 Album Collection</h1>
-      <p>Discover amazing music albums</p>
+      <div class="header-content">
+        <div class="header-text">
+          <h1>🎵 Album Collection</h1>
+          <p>Discover amazing music albums</p>
+        </div>
+        <button 
+          class="cart-icon-btn"
+          @click="toggleCart"
+          aria-label="View cart"
+        >
+          <span class="cart-icon">🛒</span>
+          <span v-if="cartCount > 0" class="cart-badge">{{ cartCount }}</span>
+        </button>
+      </div>
     </header>
 
     <main class="main">
@@ -24,18 +36,26 @@
         />
       </div>
     </main>
+
+    <CartPanel :is-open="isCartOpen" @close="closeCart" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import axios from 'axios'
 import AlbumCard from './components/AlbumCard.vue'
+import CartPanel from './components/CartPanel.vue'
 import type { Album } from './types/album'
+import { useCartStore } from './stores/cart'
 
 const albums = ref<Album[]>([])
 const loading = ref<boolean>(true)
 const error = ref<string | null>(null)
+const isCartOpen = ref<boolean>(false)
+
+const cartStore = useCartStore()
+const cartCount = computed(() => cartStore.count)
 
 const fetchAlbums = async (): Promise<void> => {
   try {
@@ -51,6 +71,14 @@ const fetchAlbums = async (): Promise<void> => {
   }
 }
 
+const toggleCart = (): void => {
+  isCartOpen.value = !isCartOpen.value
+}
+
+const closeCart = (): void => {
+  isCartOpen.value = false
+}
+
 onMounted(() => {
   fetchAlbums()
 })
@@ -63,9 +91,22 @@ onMounted(() => {
 }
 
 .header {
-  text-align: center;
   margin-bottom: 3rem;
   color: white;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.header-text {
+  text-align: center;
+  flex: 1;
 }
 
 .header h1 {
@@ -77,6 +118,53 @@ onMounted(() => {
 .header p {
   font-size: 1.2rem;
   opacity: 0.9;
+}
+
+.cart-icon-btn {
+  position: relative;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.cart-icon-btn:hover {
+  background: white;
+  transform: scale(1.1);
+}
+
+.cart-icon {
+  font-size: 1.8rem;
+  transition: transform 0.3s ease;
+}
+
+.cart-icon-btn:hover .cart-icon {
+  transform: scale(1.1);
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ff4757;
+  color: white;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .main {
@@ -145,6 +233,20 @@ onMounted(() => {
 @media (max-width: 768px) {
   .app {
     padding: 1rem;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .header-text {
+    order: 2;
+  }
+  
+  .cart-icon-btn {
+    order: 1;
+    align-self: flex-end;
   }
   
   .header h1 {
