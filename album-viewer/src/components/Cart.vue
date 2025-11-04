@@ -2,13 +2,13 @@
   <div class="cart-overlay" @click.self="closeCart">
     <div class="cart-panel">
       <div class="cart-header">
-        <h2>🛒 Panier</h2>
+        <h2>🛒 Shopping Cart</h2>
         <button class="close-btn" @click="closeCart">✕</button>
       </div>
 
       <div v-if="cartItems.length === 0" class="empty-cart">
-        <p>Votre panier est vide</p>
-        <button @click="closeCart" class="btn-continue">Continuer vos achats</button>
+        <p>Your cart is empty</p>
+        <button @click="closeCart" class="btn-continue">Continue Shopping</button>
       </div>
 
       <div v-else class="cart-content">
@@ -36,8 +36,8 @@
             <span>Total:</span>
             <span class="total-amount">${{ cartTotal.toFixed(2) }}</span>
           </div>
-          <button @click="clearCart" class="btn-clear">Vider le panier</button>
-          <button class="btn-checkout">Passer la commande</button>
+          <button @click="clearCart" class="btn-clear">Clear Cart</button>
+          <button class="btn-checkout">Checkout</button>
         </div>
       </div>
     </div>
