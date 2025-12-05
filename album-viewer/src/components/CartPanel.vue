@@ -102,6 +102,7 @@
 <script setup lang="ts">
 import { computed, ref, watch, nextTick } from 'vue'
 import { useCartStore } from '../stores/cart'
+import { PLACEHOLDER_ALBUM_THUMBNAIL } from '../constants/images'
 
 interface Props {
   isOpen: boolean
@@ -131,7 +132,7 @@ const removeItem = (albumId: number) => {
 
 const handleImageError = (event: Event): void => {
   const target = event.target as HTMLImageElement
-  target.src = 'https://via.placeholder.com/80x80/667eea/white?text=Album'
+  target.src = PLACEHOLDER_ALBUM_THUMBNAIL
 }
 
 // Focus management for accessibility
