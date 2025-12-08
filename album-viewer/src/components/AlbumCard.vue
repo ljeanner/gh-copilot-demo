@@ -21,24 +21,56 @@
     </div>
     
     <div class="album-actions">
-      <button class="btn btn-primary">Add to Cart</button>
+      <button 
+        v-if="!isInCart" 
+        class="btn btn-primary"
+        @click="handleAddToCart"
+        :aria-label="`Add ${album.title} to cart`"
+        type="button"
+      >
+        Add to Cart
+      </button>
+      <button 
+        v-else 
+        class="btn btn-in-cart"
+        @click="handleRemoveFromCart"
+        :aria-label="`Remove ${album.title} from cart`"
+        type="button"
+      >
+        In Cart ✓
+      </button>
       <button class="btn btn-secondary">Preview</button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { Album } from '../types/album'
+import { useCartStore } from '../stores/cart'
+import { PLACEHOLDER_ALBUM_COVER } from '../constants/images'
 
 interface Props {
   album: Album
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
+
+const cartStore = useCartStore()
+
+const isInCart = computed(() => cartStore.isInCart(props.album.id))
+
+const handleAddToCart = (): void => {
+  cartStore.addToCart(props.album)
+}
+
+const handleRemoveFromCart = (): void => {
+  cartStore.removeFromCart(props.album.id)
+}
 
 const handleImageError = (event: Event): void => {
   const target = event.target as HTMLImageElement
-  target.src = 'https://via.placeholder.com/300x300/667eea/white?text=Album+Cover'
+  target.src = PLACEHOLDER_ALBUM_COVER
 }
 </script>
 
@@ -176,6 +208,16 @@ const handleImageError = (event: Event): void => {
 .btn-secondary:hover {
   background: #667eea;
   color: white;
+  transform: translateY(-2px);
+}
+
+.btn-in-cart {
+  background: #51cf66;
+  color: white;
+}
+
+.btn-in-cart:hover {
+  background: #40c057;
   transform: translateY(-2px);
 }
 
