@@ -1,0 +1,19 @@
+# Rename this file to terraform.tfvars and fill in your own values before running terraform apply.
+
+resource_group_name          = "rg-album-demo"
+location                     = "eastus"
+log_analytics_workspace_name = "log-album-demo"
+container_apps_env_name      = "env-album-demo"
+
+# Azure Container Registry
+registry_name     = "myacrregistry"          # Name only, without .azurecr.io
+registry_username = "myacrregistry"
+registry_password = "REPLACE_WITH_ACR_PASSWORD"
+
+# Container images (built via az acr build)
+api_image    = "myacrregistry.azurecr.io/album-api:latest"
+viewer_image = "myacrregistry.azurecr.io/album-viewer:latest"
+
+# Optional: Frontend environment variables
+# vite_album_api_host   = ""        # Defaults to the album-api FQDN when left empty
+# vite_background_color = "#ffffff"
